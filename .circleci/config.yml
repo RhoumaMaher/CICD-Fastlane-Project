@@ -12,6 +12,10 @@ jobs:
             sudo apt-get update
             sudo apt-get install -y openjdk-17-jdk
       - run:
+          name: Add Google Cloud SDK GPG key
+          command: |
+            curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+      - run:
           name: Set JAVA_HOME to Java 17
           command: |
             echo "export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64" >> $BASH_ENV
