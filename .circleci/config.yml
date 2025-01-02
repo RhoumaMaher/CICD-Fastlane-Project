@@ -7,13 +7,21 @@ jobs:
     steps:
       - checkout
 
-      # Ensure scripts are executable
-      - run: chmod +x scripts/*.sh
+      # Update Ruby to a compatible version
+      - run:
+          name: Install Ruby 3.1.0
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y software-properties-common
+            sudo apt-add-repository ppa:brightbox/ruby-ng
+            sudo apt-get update
+            sudo apt-get install -y ruby3.1
+            ruby --version
 
-      # Install Bundler
+      # Install Bundler 2.6.2
       - run: gem install bundler:2.6.2
 
-      # Install Ruby gems
+      # Install dependencies from Gemfile
       - run: bundle install
 
       # Run prepare script
