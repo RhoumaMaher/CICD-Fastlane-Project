@@ -11,7 +11,7 @@ jobs:
           command: sudo gem install bundler
       - run:
           name: Install Ruby Gems
-          command: bundle install
+          command: sudo bundle install
       - run:
           name: Prepare Android
           command: bash scripts/prepare-android.sh
