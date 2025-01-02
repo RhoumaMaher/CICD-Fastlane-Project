@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
             FastlaneCICDTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
-                        name = "Android",
+                        name = "CICD",
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
