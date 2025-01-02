@@ -1,5 +1,5 @@
-# .circleci/config.yml
 version: 2.1
+
 jobs:
   beta-android:
     docker:
@@ -11,11 +11,11 @@ jobs:
           command: |
             sudo apt-get update
             sudo apt-get install -y openjdk-17-jdk
-            - run:
-                name: Set JAVA_HOME to Java 17
-                command: |
-                  echo "export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64" >> $BASH_ENV
-                  echo "export PATH=\$JAVA_HOME/bin:\$PATH" >> $BASH_ENV
+      - run:
+          name: Set JAVA_HOME to Java 17
+          command: |
+            echo "export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64" >> $BASH_ENV
+            echo "export PATH=\$JAVA_HOME/bin:\$PATH" >> $BASH_ENV
       - run:
           command: |
             bash scripts/prepare-android.sh
