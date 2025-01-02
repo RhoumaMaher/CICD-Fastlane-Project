@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   beta-android:
     machine:
-      image: ubuntu-2204:2023.09.2  # Use the latest Ubuntu image
+      image: circleci/android:api-30-node
     steps:
       # Step 1: Checkout code
       - checkout
