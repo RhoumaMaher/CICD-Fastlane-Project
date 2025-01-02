@@ -10,6 +10,7 @@ jobs:
           name: Install Java 17
           command: |
             sudo apt-get update
+            sudo apt install google-cloud-sdk
             sudo apt install openjdk-17-jdk-headless
       - run:
           name: Add Google Cloud SDK GPG key
