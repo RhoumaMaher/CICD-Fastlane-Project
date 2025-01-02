@@ -6,10 +6,21 @@ jobs:
       - image: circleci/android:api-30-node
     steps:
       - checkout
-      - run:
-          command: |
-            bash scripts/prepare-android.sh
-            bash scripts/beta-android.sh
+
+      # Ensure scripts are executable
+      - run: chmod +x scripts/*.sh
+
+      # Install Bundler
+      - run: gem install bundler:2.6.2
+
+      # Install Ruby gems
+      - run: bundle install
+
+      # Run prepare script
+      - run: bash scripts/prepare-android.sh
+
+      # Run beta-android script
+      - run: bash scripts/beta-android.sh
 
 workflows:
   beta:
