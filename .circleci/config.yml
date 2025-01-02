@@ -6,9 +6,12 @@ jobs:
       - image: circleci/android:api-30-node
     steps:
       - checkout
-      - run: "bash scripts/prepare-android.sh; bash scripts/beta-android.sh"
+      - run:
+          command: |
+            bash scripts/prepare-android.sh
+            bash scripts/beta-android.sh
 
 workflows:
-  build-test-adhoc:
+  beta:
     jobs:
       - beta-android
