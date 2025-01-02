@@ -2,7 +2,7 @@ version: 2.1
 
 jobs:
   beta-android:
-    machine:
+    docker:
       image: circleci/android:api-30-node
     steps:
       # Step 1: Checkout code
