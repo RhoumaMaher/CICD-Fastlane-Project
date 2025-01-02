@@ -7,6 +7,12 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install Bundler
+          command: gem install bundler
+      - run:
+          name: Install Ruby Gems
+          command: bundle install
+      - run:
           name: Prepare Android
           command: bash scripts/prepare-android.sh
       - run:
