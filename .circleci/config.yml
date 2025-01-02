@@ -6,12 +6,40 @@ jobs:
       - image: circleci/android:api-30-node
     steps:
       - checkout
+
+      # Install Java 17
       - run:
+          name: Install Java 17
           command: |
-            bash scripts/prepare-android.sh
-            bash scripts/beta-android.sh
+            sudo apt-get update
+            sudo apt-get install -y openjdk-17-jdk
+            java -version
+
+      # Set JAVA_HOME to Java 17
+      - run:
+          name: Set JAVA_HOME to Java 17
+          command: |
+            export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+            echo "export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64" >> $BASH_ENV
+            source $BASH_ENV
+            echo "JAVA_HOME is set to: $JAVA_HOME"
+
+      # Ensure scripts are executable
+      - run: chmod +x scripts/*.sh
+
+      # Install Bundler
+      - run: gem install bundler:2.6.2
+
+      # Install dependencies from Gemfile
+      - run: bundle install
+
+      # Run prepare script
+      - run: bash scripts/prepare-android.sh
+
+      # Run beta-android script
+      - run: bash scripts/beta-android.sh
 
 workflows:
-  beta:
+  build-test-adhoc:
     jobs:
       - beta-android
