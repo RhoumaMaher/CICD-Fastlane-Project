@@ -7,11 +7,20 @@ jobs:
     steps:
       - checkout
 
+      # Add the missing GPG key for cloud-sdk
+      - run:
+          name: Add GPG Key for cloud-sdk
+          command: sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C0BA5CE6DC6315A3
+
+      # Update APT repositories
+      - run:
+          name: Update APT repositories
+          command: sudo apt-get update
+
       # Install Java 17
       - run:
           name: Install Java 17
           command: |
-            sudo apt-get update
             sudo apt-get install -y openjdk-17-jdk
             java -version
 
@@ -43,3 +52,4 @@ workflows:
   build-test-adhoc:
     jobs:
       - beta-android
+
