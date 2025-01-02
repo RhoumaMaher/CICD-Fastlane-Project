@@ -8,7 +8,7 @@ jobs:
       - checkout
       - run:
           name: Install Bundler
-          command: gem install bundler
+          command: sudo gem install bundler
       - run:
           name: Install Ruby Gems
           command: bundle install
