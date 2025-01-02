@@ -7,18 +7,27 @@ jobs:
     steps:
       - checkout
 
-      # Update Ruby to a compatible version
+      # Add the missing GPG key for cloud-sdk-buster
+      - run:
+          name: Add GPG Key for cloud-sdk
+          command: sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C0BA5CE6DC6315A3
+
+      # Update apt repositories
+      - run:
+          name: Update APT repositories
+          command: sudo apt-get update
+
+      # Upgrade Ruby to a compatible version
       - run:
           name: Install Ruby 3.1.0
           command: |
-            sudo apt-get update
             sudo apt-get install -y software-properties-common
             sudo apt-add-repository ppa:brightbox/ruby-ng
             sudo apt-get update
             sudo apt-get install -y ruby3.1
             ruby --version
 
-      # Install Bundler 2.6.2
+      # Install Bundler
       - run: gem install bundler:2.6.2
 
       # Install dependencies from Gemfile
@@ -31,6 +40,6 @@ jobs:
       - run: bash scripts/beta-android.sh
 
 workflows:
-  beta:
+  build-test-adhoc:
     jobs:
       - beta-android
