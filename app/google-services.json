@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "872333274787",
+    "project_id": "cicd-project-fastlane",
+    "storage_bucket": "cicd-project-fastlane.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:872333274787:android:bcc697cf5daf57137e5916",
+        "android_client_info": {
+          "package_name": "com.rhouma.fastlanecicd"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2iOCmZD04N0GxBp7ws9sEkglvVxwjA2w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
