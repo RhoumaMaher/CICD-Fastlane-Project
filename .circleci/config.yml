@@ -2,29 +2,37 @@ version: 2.1
 
 jobs:
   beta-android:
-    docker:
-      - image: circleci/android:api-30-node
+    machine:
+      image: ubuntu-2204:2023.09.2  # Use the latest Ubuntu image
     steps:
+      # Step 1: Checkout code
       - checkout
+
+      # Step 2: Install necessary dependencies for Java setup
       - run:
-          name: Install Java 17
+          name: Install prerequisites
           command: |
             sudo apt-get update
-            sudo apt install google-cloud-sdk
-            sudo apt install openjdk-17-jdk-headless
+            sudo apt-get install -y curl
+
+      # Step 3: Set up Java JDK 17
       - run:
-          name: Add Google Cloud SDK GPG key
+          name: Setup Java JDK 17
           command: |
-            curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-      - run:
-          name: Set JAVA_HOME to Java 17
-          command: |
-            echo "export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64" >> $BASH_ENV
+            curl -sL "https://github.com/actions/setup-java/releases/download/v4.2.1/setup-java" -o setup-java.sh
+            chmod +x setup-java.sh
+            ./setup-java.sh -v adopt@17
+            echo "JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))" >> $BASH_ENV
             echo "export PATH=\$JAVA_HOME/bin:\$PATH" >> $BASH_ENV
+
+      # Step 4: Prepare and run Android scripts
       - run:
-          command: |
-            bash scripts/prepare-android.sh
-            bash scripts/beta-android.sh
+          name: Prepare Android Environment
+          command: bash scripts/prepare-android.sh
+
+      - run:
+          name: Run Beta Android Script
+          command: bash scripts/beta-android.sh
 
 workflows:
   beta:
