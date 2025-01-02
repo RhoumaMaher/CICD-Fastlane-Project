@@ -13,6 +13,9 @@ jobs:
           name: Install Ruby Gems
           command: sudo bundle install
       - run:
+          name: Update Version Code
+          command: bash scripts/update-version-code.sh
+      - run:
           name: Prepare Android
           command: bash scripts/prepare-android.sh
       - run:
