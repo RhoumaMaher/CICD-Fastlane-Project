@@ -6,40 +6,12 @@ jobs:
       - image: circleci/android:api-30-node
     steps:
       - checkout
-
-      # Add the missing GPG key for cloud-sdk-buster
       - run:
-          name: Add GPG Key for cloud-sdk
-          command: sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C0BA5CE6DC6315A3
-
-      # Update apt repositories
-      - run:
-          name: Update APT repositories
-          command: sudo apt-get update
-
-      # Upgrade Ruby to a compatible version
-      - run:
-          name: Install Ruby 3.1.0
           command: |
-            sudo apt-get install -y software-properties-common
-            sudo apt-add-repository ppa:brightbox/ruby-ng
-            sudo apt-get update
-            sudo apt-get install -y ruby3.1
-            ruby --version
-
-      # Install Bundler
-      - run: gem install bundler:2.6.2
-
-      # Install dependencies from Gemfile
-      - run: bundle install
-
-      # Run prepare script
-      - run: bash scripts/prepare-android.sh
-
-      # Run beta-android script
-      - run: bash scripts/beta-android.sh
+            bash scripts/prepare-android.sh
+            bash scripts/beta-android.sh
 
 workflows:
-  build-test-adhoc:
+  beta:
     jobs:
       - beta-android
