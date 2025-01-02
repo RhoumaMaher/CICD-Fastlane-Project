@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   beta-android:
     docker:
-      - image: jetbrains/qodana-jvm-android:latest
+      - image: cimg/android:2024.11.1-node
     steps:
       - checkout
       - run:
